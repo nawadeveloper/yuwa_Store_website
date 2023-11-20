@@ -15,7 +15,7 @@ const Header = () => {
         <div className="flex-auto mx-9 flex border-2 border-rambow-200 rounded-md overflow-hidden">
           <label
             htmlFor="search_product"
-            className="material-symbols-rounded p-1 text-2xl cursor-pointer"
+            className="material-symbols-rounded p-1 text-2xl cursor-pointer shrink-0"
           >
             search
           </label>
@@ -23,7 +23,7 @@ const Header = () => {
             type="text"
             id="search_product"
             placeholder="Search For Our Product."
-            className="border-l-2 flex-auto text-xl px-2 border-rambow-200 focus:outline-0"
+            className="border-l-2 flex-auto text-sm md:text-xl px-2 border-rambow-200 focus:outline-0"
           />
         </div>
 

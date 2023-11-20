@@ -5,6 +5,7 @@
 html,
 body {
   @apply font-quickSand h-[4000px];
+  overflow-x: hidden;
 }
 
 .material-symbols-rounded.filled {
@@ -13,4 +14,25 @@ body {
 
 .display_size {
   @apply xl:max-w-7xl lg:max-w-5xl md:max-w-4xl sm:max-w-2xl px-1 mx-auto;
+}
+.display_size_noPadding {
+  @apply xl:max-w-7xl lg:max-w-5xl md:max-w-4xl sm:max-w-2xl mx-auto;
+}
+
+li.mobile_menu_hover:hover {
+  @apply text-white;
+}
+
+li.mobile_menu_hover:hover > p {
+  @apply underline;
+}
+
+li.mobile_menu_hover:hover > ul {
+  @apply block;
+}
+
+@media only screen and (max-width: 768px) {
+  .remove_from_small_screen {
+    display: none;
+  }
 }
