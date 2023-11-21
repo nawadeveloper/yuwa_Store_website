@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply font-quickSand h-[4000px];
+  @apply font-quickSand;
   overflow-x: hidden;
 }
 
@@ -29,6 +29,44 @@ li.mobile_menu_hover:hover > p {
 
 li.mobile_menu_hover:hover > ul {
   @apply block;
+}
+
+div.women_gradient {
+  background: #113946;
+  background: -webkit-radial-gradient(
+    circle farthest-corner at top right,
+    #2885a4 0%,
+    #113946 44%
+  );
+  background: -moz-radial-gradient(
+    circle farthest-corner at top right,
+    #2885a4 0%,
+    #113946 44%
+  );
+  background: radial-gradient(
+    circle farthest-corner at top right,
+    #2885a4 0%,
+    #113946 44%
+  );
+}
+
+div.men_gradient {
+  background: #ead7bb;
+  background: -webkit-radial-gradient(
+    circle farthest-corner at top left,
+    #fff7e8 0%,
+    #ead7bb 44%
+  );
+  background: -moz-radial-gradient(
+    circle farthest-corner at top left,
+    #fff7e8 0%,
+    #ead7bb 44%
+  );
+  background: radial-gradient(
+    circle farthest-corner at top left,
+    #fff7e8 0%,
+    #ead7bb 44%
+  );
 }
 
 @media only screen and (max-width: 768px) {

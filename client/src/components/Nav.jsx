@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import DropMenuDesktop from "./DropMenuDesktop";
 import MENU_DATA from "../data/MENU_DATA";
 import DropMenuMobile from "./DropMenuMobile";
+import SignInLink from "./SignInLink";
 
 const Nav = () => {
   const drop_menu_desktop = useRef();
@@ -26,6 +27,8 @@ const Nav = () => {
       if (!element.contains(target) && !navRef.contains(target)) {
         element.classList.add("hidden");
       }
+    } else {
+      element.classList.add("hidden");
     }
   };
 
@@ -35,19 +38,21 @@ const Nav = () => {
 
   return (
     <>
-      <div className="border-b-2 border-rambow-300 py-2 md:hidden display_size_noPadding relative">
+      <div className="border-b-2 border-rambow-300 py-2 md:hidden display_size_noPadding relative flex justify-between items-center">
         <span
           onClick={mobileMenuToggle}
-          className="material-symbols-rounded border mx-1 px-[2px] border-rambow-400 rounded-sm inline-flex align-middle cursor-pointer"
+          className="material-symbols-rounded border mx-1 px-[2px] border-rambow-400 rounded-sm cursor-pointer"
         >
           menu
         </span>
 
+        <SignInLink className="pr-1" />
+
         {/* nav for mobile */}
         {
           <nav
-            className={`mt-1 w-full bg-white z-20 absolute top-full transition-all duration-200 ease-in-out ${
-              menuToggle ? "left-1" : "-left-full"
+            className={`mt-1 w-full z-20 absolute top-full transition-all duration-200 ease-in-out ${
+              menuToggle ? "left-1 opacity-100" : "-left-full opacity-0"
             }`}
           >
             <ul className="w-2/5">
@@ -57,7 +62,7 @@ const Nav = () => {
                     key={menu}
                     className="bg-rambow-400 border-b text-rambow-100 border-rambow-200 relative flex justify-between cursor-pointer mobile_menu_hover"
                   >
-                    <p className="pl-1 py-2 inline-block  font-bold">{menu}</p>
+                    <p className="pl-1 py-2 inline-block font-bold">{menu}</p>
                     <span className="material-symbols-rounded  py-2 leading-none">
                       arrow_right
                     </span>
@@ -73,7 +78,7 @@ const Nav = () => {
       {/* nav for desktop */}
       <nav
         ref={nav}
-        onMouseEnter={nav_hover}
+        onMouseOver={nav_hover}
         onMouseLeave={nav_hover_out}
         className="hidden md:flex justify-between display_size border-b-2 border-rambow-300 relative"
       >

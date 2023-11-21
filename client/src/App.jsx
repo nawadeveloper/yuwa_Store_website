@@ -1,9 +1,12 @@
 import Header from "./components/Header";
+import Hero from "./components/Hero";
 function App() {
   return (
     <>
       <Header />
-      <div className="h-[3000px]">dljf</div>
+      <main>
+        <Hero />
+      </main>
     </>
   );
 }
