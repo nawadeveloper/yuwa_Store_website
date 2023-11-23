@@ -69,6 +69,16 @@ div.men_gradient {
   );
 }
 
+div.dark_to_light {
+  background: #bca37f;
+  background: linear-gradient(to top, #bca37f 0%, #113946 100%);
+}
+
+div.light_to_dark {
+  background: #113946;
+  background: linear-gradient(to top, #113946 0%, #fff2d8 100%);
+}
+
 @media only screen and (max-width: 768px) {
   .remove_from_small_screen {
     display: none;
