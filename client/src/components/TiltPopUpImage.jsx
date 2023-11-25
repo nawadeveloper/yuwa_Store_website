@@ -16,7 +16,7 @@ const TiltPopUpImage = ({
       ? "lg:ml-36 lg:pl-80 lg:pr-10 lg:rounded-r-[60px]"
       : "lg:mr-36 lg:pr-80 lg:pl-10 lg:rounded-l-[60px]";
   return (
-    <div className="px-16 mt-64 lg:mt-0 md:px-24">
+    <div className="px-5 sm:px-16 mt-64 lg:mt-0 md:px-24">
       <div className="relative">
         <div
           className={`lg:w-96 w-[80%] ml-[10%] h-64 p-2 border-2 border-white rounded-lg -top-52 absolute lg:top-1/2 lg:-translate-y-1/2 lg:ml-0 ${img_class}`}

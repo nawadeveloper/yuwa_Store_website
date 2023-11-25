@@ -1,6 +1,8 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import InnovateSection from "./components/InnovateSection";
+import DisplaySection from "./components/DisplaySection";
+
 function App() {
   return (
     <>
@@ -8,7 +10,7 @@ function App() {
       <main>
         <Hero />
         <InnovateSection />
-        <div className="h-44"></div>
+        <DisplaySection />
       </main>
     </>
   );
