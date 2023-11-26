@@ -35,6 +35,11 @@ const DisplaySection = () => {
           img_path="bassball_jacket.jpeg"
           product_name="bassball_jacket"
         />
+        <ItemSample
+          img_path="bassball_jacket.jpeg"
+          product_name="bassball_jacket"
+        />
+        <ItemSample img_path="black_jacket.jpeg" product_name="black_jacket" />
       </div>
 
       <Pagination />

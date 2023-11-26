@@ -11,8 +11,12 @@ const ItemSample = ({ img_path, product_name }) => {
       </div>
 
       <div className="flex py-2 justify-between">
-        <h4 className="font-bold text-sm">{product_name}</h4>
-        <span className="material-symbols-rounded">favorite</span>
+        <h4 className="font-bold text-sm">
+          <a href="#">{product_name}</a>
+        </h4>
+        <span className="material-symbols-rounded cursor-pointer">
+          favorite
+        </span>
       </div>
     </div>
   );

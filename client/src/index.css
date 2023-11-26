@@ -70,17 +70,25 @@ div.men_gradient {
 }
 
 div.dark_to_light {
-  background: #bca37f;
-  background: linear-gradient(to top, #bca37f 0%, #113946 100%);
+  background: #fff2d8;
+  background: linear-gradient(to top, #fff2d8 0%, #113946 100%);
 }
 
 div.light_to_dark {
   background: #113946;
-  background: linear-gradient(to top, #113946 0%, #fff2d8 100%);
+  background: linear-gradient(to top, #113946 0%, #bca37f 100%);
 }
 
 .grid-template {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.text_shadow {
+  text-shadow: 1px 1px 2px #113946;
+}
+
+.drop_shadow {
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.6);
 }
 
 @media only screen and (max-width: 768px) {

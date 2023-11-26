@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import InnovateSection from "./components/InnovateSection";
 import DisplaySection from "./components/DisplaySection";
+import FrameSection from "./components/FrameSection";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Hero />
         <InnovateSection />
         <DisplaySection />
+        <FrameSection />
       </main>
     </>
   );
