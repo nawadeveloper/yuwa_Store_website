@@ -69,6 +69,15 @@ div.men_gradient {
   );
 }
 
+div.offer_gradient {
+  background: #bca37f;
+  background: radial-gradient(
+    circle farthest-corner at top right,
+    #ead7bb 0%,
+    #bca37f 40%
+  );
+}
+
 div.dark_to_light {
   background: #fff2d8;
   background: linear-gradient(to top, #fff2d8 0%, #113946 100%);
