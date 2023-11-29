@@ -1,3 +1,26 @@
+import { motion } from "framer-motion";
+
+const move_animation = {
+  left: {
+    opacity: 0,
+    translateX: -150,
+  },
+
+  right: {
+    opacity: 0,
+    translateX: 150,
+  },
+
+  end: {
+    opacity: 1,
+    translateX: 0,
+    transition: {
+      type: "tween",
+      duration: 0.8,
+    },
+  },
+};
+
 const Hero = () => {
   return (
     <section className="display_size py-8">
@@ -19,9 +42,14 @@ const Hero = () => {
             />
 
             <div className="md:mt-[120px] lg:mt-auto">
-              <h2 className="md:ml-[225px] p-8 pb-2 font-bold text-sm lg:text-md">
+              <motion.h2
+                variants={move_animation}
+                initial="left"
+                whileInView="end"
+                className="md:ml-[225px] p-8 pb-2 font-bold text-sm lg:text-md"
+              >
                 Unveiling a World of Style for Every Man
-              </h2>
+              </motion.h2>
 
               <div className="men_gradient rounded-t-3xl">
                 <div className="md:ml-[225px] p-4 lg:p-8 text-justify text-rambow-400">
@@ -54,9 +82,14 @@ const Hero = () => {
             />
 
             <div className="md:mt-[120px] lg:mt-auto">
-              <h2 className="md:mr-[225px] p-8 pb-2 font-bold text-sm lg:text-md">
+              <motion.h2
+                variants={move_animation}
+                initial="right"
+                whileInView="end"
+                className="md:mr-[225px] p-8 pb-2 font-bold text-sm lg:text-md"
+              >
                 Elevate Your Wardrobe with Timeless Elegance
-              </h2>
+              </motion.h2>
 
               <div className="women_gradient rounded-t-3xl">
                 <div className="md:mr-[225px] p-4 lg:p-8 text-justify text-rambow-200">
