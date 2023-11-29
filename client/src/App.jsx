@@ -1,23 +1,14 @@
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import InnovateSection from "./components/InnovateSection";
-import DisplaySection from "./components/DisplaySection";
-import FrameSection from "./components/FrameSection";
-import Offer from "./components/Offer";
-import Footer from "./components/Footer";
-
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import Layout from "./components/Layout";
 function App() {
   return (
     <>
-      <Header />
-      <main>
-        <Hero />
-        <InnovateSection />
-        <DisplaySection />
-        <FrameSection />
-      </main>
-      <Offer />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+      </Routes>
     </>
   );
 }
