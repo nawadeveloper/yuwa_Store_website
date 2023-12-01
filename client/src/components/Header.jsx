@@ -1,6 +1,7 @@
 import logo from "../assets/yuwa_logo.png";
 import Nav from "./Nav";
 import SignInLink from "./SignInLink";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -10,9 +11,9 @@ const Header = () => {
       </div>
 
       <div className="display_size flex py-4 justify-between items-center border-b-2 border-rambow-300">
-        <a href="#" className="shrink-0">
+        <Link to={"/"} className="shrink-0">
           <img src={logo} alt="y" />
-        </a>
+        </Link>
         <div className="flex-auto md:mx-9 mr-0 ml-9 flex border-2 border-rambow-200 rounded-md overflow-hidden">
           <label
             htmlFor="search_product"

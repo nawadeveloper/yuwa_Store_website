@@ -9,7 +9,7 @@ const DropMenuDesktop = (props) => {
     <div className="display_size flex">
       {menu_list &&
         Object.keys(menu_list).map((col, i) => (
-          <div key={i} className="flex-1">
+          <div key={col} className="flex-1">
             <ul>
               <li className="font-bold p-2">
                 <a className="border-b border-rambow-400 p-2 pl-0" href="#">
@@ -17,7 +17,7 @@ const DropMenuDesktop = (props) => {
                 </a>
               </li>
               {menu_list[col].map((list, j) => (
-                <li key={j} className="p-2">
+                <li key={list} className="p-2">
                   <a className="p-2 hover:underline" href="#">
                     {list}
                   </a>
