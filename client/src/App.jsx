@@ -3,6 +3,7 @@ import HomePage from "./components/HomePage";
 import Layout from "./components/Layout";
 import ProductsPage from "./components/ProductsPage";
 import SignInPage from "./components/SignInPage";
+import AdminPanel from "./components/AdminPanel";
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           />
         </Route>
         <Route path="/signin" element={<SignInPage />} />
+        <Route path="/admin_panel/add_item" element={<AdminPanel />} />
       </Routes>
     </>
   );
