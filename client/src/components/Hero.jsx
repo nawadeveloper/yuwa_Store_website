@@ -46,6 +46,7 @@ const Hero = () => {
                 variants={move_animation}
                 initial="left"
                 whileInView="end"
+                viewport={{ once: true, amount: 0.5 }}
                 className="md:ml-[225px] p-8 pb-2 font-bold text-sm lg:text-md"
               >
                 Unveiling a World of Style for Every Man
