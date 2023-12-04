@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(cors());
@@ -11,4 +12,10 @@ app.get("/", (req, res) => {
   res.send("hello again!");
 });
 
-app.listen(process.env.PORT);
+mongoose
+  .connect(process.env.MONG_DB_CONNECTION)
+  .then(() =>
+    app.listen(process.env.PORT, () =>
+      console.log(mongoose.connection.readyState)
+    )
+  );
