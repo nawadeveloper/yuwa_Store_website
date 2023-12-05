@@ -4,8 +4,11 @@ dotenv.config();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+// import router
+const authRouter = require("./Routers/AuthRouter.js");
+
 const app = express();
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -18,4 +21,8 @@ mongoose
     app.listen(process.env.PORT, () =>
       console.log(mongoose.connection.readyState)
     )
-  );
+  )
+  .catch((e) => console.log(e));
+
+//set route
+app.use("/auth", authRouter);
