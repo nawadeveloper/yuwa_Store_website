@@ -15,14 +15,11 @@ const RegisterUser = () => {
         password: password?.current.value,
       }),
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
 
-    if (response.ok) {
-      const message = await response.json();
-      window.alert(message.message);
-    } else {
-      window.alert("Something went wrong. error fetching data. Try later.");
-    }
+    const message = await response.json();
+    window.alert(message.message);
   };
 
   return (
