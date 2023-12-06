@@ -1,4 +1,5 @@
 import InputWithIcon from "./InputWithIcon";
+import RegisterUser from "./RegisterUser";
 import SignInCover from "./SignInCover";
 
 const SignInPage = () => {
@@ -37,24 +38,7 @@ const SignInPage = () => {
             <h2 className="font-bold mb-8 text-white text-3xl text-center">
               Register
             </h2>
-            <form className="flex flex-col gap-4">
-              <InputWithIcon
-                id="registerUsername"
-                icon="person"
-                input_type="text"
-                placeholder="username"
-              />
-              <InputWithIcon
-                id="registerPassword"
-                icon="lock"
-                input_type="password"
-                placeholder="password"
-              />
-
-              <button className="bg-rambow-400 py-1 px-20 rounded-full text-white font-bold mx-auto">
-                Register
-              </button>
-            </form>
+            <RegisterUser />
           </div>
         </div>
       </div>

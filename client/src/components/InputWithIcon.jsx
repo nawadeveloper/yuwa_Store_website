@@ -4,6 +4,7 @@ const InputWithIcon = ({
   icon_color = "text-rambow-300",
   placeholder = "",
   id,
+  inputRef,
 }) => {
   return (
     <div className="flex bg-white rounded-md overflow-hidden">
@@ -18,6 +19,7 @@ const InputWithIcon = ({
         className="flex-grow px-2 rounded-r-md"
         placeholder={placeholder}
         type={input_type}
+        ref={inputRef}
       />
     </div>
   );

@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get("/", authControllers.sendMessage);
 
+router.post("/register", authControllers.register);
+
 module.exports = router;
