@@ -5,14 +5,9 @@ const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 
 //helper function
-
-function getCookieVerifyInfo(token_cookie) {
-  let data;
-  jwt.verify(token_cookie, "process.env.PRIVATE_KEY", {}, (err, decoded) => {
-    if (err) throw err;
-    data = decoded;
-  });
-  return data;
+function addTokenToCookie(dataForCookie, response) {
+  const token = jwt.sign(dataForCookie, process.env.PRIVATE_KEY, {});
+  response.cookie("yuwa_user", token);
 }
 
 //main functions
@@ -30,6 +25,7 @@ const register = (req, res) => {
   }
 
   bcrypt.hash(password, saltRounds, async (err, hash) => {
+    if (err) throw err;
     try {
       const addUser = await Users.create({
         username,
@@ -38,11 +34,9 @@ const register = (req, res) => {
 
       const dataForCookie = { username: addUser.username, userId: addUser._id };
 
-      var token = jwt.sign(dataForCookie, process.env.PRIVATE_KEY, {});
+      addTokenToCookie(dataForCookie, res);
 
-      res.cookie("yuwa_user", token);
-
-      res.json({ message: `${addUser?.username} is created.` });
+      res.json({ message: `${addUser?.username} is created.`, register: true });
     } catch (e) {
       if (e.code === 11000) {
         res.status(400).json({
@@ -55,7 +49,42 @@ const register = (req, res) => {
   });
 };
 
+const check_login = (req, res) => {
+  const token = req.cookies;
+
+  try {
+    jwt.verify(
+      token.yuwa_user,
+      process.env.PRIVATE_KEY,
+      {},
+      async (err, decoded) => {
+        if (err) throw err;
+
+        const defaultValues = {
+          username: "",
+          userId: "",
+          logedIn: false,
+        };
+
+        const userData = await Users.findOne({ username: decoded.username });
+        if (decoded.userId == userData._id) {
+          res.json({
+            username: decoded.username,
+            userId: decoded.userId,
+            logedIn: true,
+          });
+        } else {
+          res.json(defaultValues);
+        }
+      }
+    );
+  } catch (e) {
+    res.json(defaultValues);
+  }
+};
+
 module.exports = {
   sendMessage,
   register,
+  check_login,
 };

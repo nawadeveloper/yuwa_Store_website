@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import InputWithIcon from "./InputWithIcon";
+import { useNavigate } from "react-router-dom";
 
 const RegisterUser = () => {
   const username = useRef();
   const password = useRef();
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -20,6 +22,10 @@ const RegisterUser = () => {
 
     const message = await response.json();
     window.alert(message.message);
+
+    if (message.register) {
+      navigate("/");
+    }
   };
 
   return (

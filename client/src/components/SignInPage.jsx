@@ -1,8 +1,17 @@
 import InputWithIcon from "./InputWithIcon";
 import RegisterUser from "./RegisterUser";
 import SignInCover from "./SignInCover";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 const SignInPage = () => {
+  const { userInfo } = useContext(UserContext);
+
+  if (userInfo.logedIn) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="w-screen h-screen overflow-hidden flex items-center bg-rambow-100">
       <div className="display_size_noPadding min-h-[300px] flex flex-1 rounded-lg overflow-hidden bg-rambow-400 relative">
