@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
 
 const animation = {
   show: { opacity: 1, height: "100%" },
@@ -11,6 +12,17 @@ const animation = {
 const SignInLink = ({ className }) => {
   const { userInfo } = useContext(UserContext);
   const [showUserOption, setShowUserOption] = useState(false);
+
+  const logout = async (e) => {
+    e.preventDefault();
+
+    const conformation = window.confirm("Are you sure you want to logout?");
+
+    if (conformation) {
+      Cookies.remove("yuwa_user");
+      window.location.reload();
+    }
+  };
 
   return (
     <div className={className}>
@@ -43,7 +55,10 @@ const SignInLink = ({ className }) => {
             animate={showUserOption ? "show" : "hide"}
             className="absolute inline-block z-10 bg-rambow-400 text-rambow-100 text-sm font-bold bottom-0 left-0 right-0 translate-y-full rounded-sm p-2"
           >
-            <button className="hover:underline hover:underline-offset-2 inline-block p-1 cursor-pointer">
+            <button
+              onClick={logout}
+              className="hover:underline hover:underline-offset-2 inline-block p-1 cursor-pointer"
+            >
               logout
             </button>
           </motion.div>

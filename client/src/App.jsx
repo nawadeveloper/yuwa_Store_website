@@ -22,15 +22,21 @@ async function check_login(setUserInfo) {
 }
 
 function App() {
-  const { setUserInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     const token = Cookies.get("yuwa_user");
 
     if (token) {
       check_login(setUserInfo);
+    } else {
+      setUserInfo({
+        username: "",
+        userId: "",
+        logedIn: false,
+      });
     }
-  }, []);
+  }, [userInfo.logedIn]);
 
   return (
     <>
