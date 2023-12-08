@@ -83,8 +83,40 @@ const check_login = (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const findUser = await Users.findOne({ username });
+
+    if (!findUser) {
+      res.json({ message: `${username} could not be found.` });
+      return;
+    }
+
+    bcrypt.compare(password, findUser.password, (err, result) => {
+      if (err) throw err;
+
+      if (result) {
+        const dataForCookie = {
+          username: findUser.username,
+          userId: findUser._id,
+        };
+
+        addTokenToCookie(dataForCookie, res);
+        res.json({ message: "login successful." });
+      } else {
+        res.json({ message: "Cridential does not match. Please try again." });
+      }
+    });
+  } catch (e) {
+    res.status(400).res({ message: e.message });
+  }
+};
+
 module.exports = {
   sendMessage,
   register,
   check_login,
+  login,
 };

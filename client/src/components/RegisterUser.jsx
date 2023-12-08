@@ -1,14 +1,9 @@
 import { useRef } from "react";
 import InputWithIcon from "./InputWithIcon";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
-import { useContext } from "react";
 
-const RegisterUser = () => {
+const RegisterUser = ({ user }) => {
   const username = useRef();
   const password = useRef();
-  const navigate = useNavigate();
-  const { userInfo, setUserInfo } = useContext(UserContext);
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -27,8 +22,7 @@ const RegisterUser = () => {
     window.alert(message.message);
 
     if (message.register) {
-      setUserInfo({ ...userInfo, logedIn: true });
-      navigate("/");
+      user?.setUserInfo({ ...user?.userInfo, logedIn: true });
     }
   };
 

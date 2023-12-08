@@ -8,9 +8,6 @@ const ProductsPage = () => {
           <h2 className="font-bold text-rambow-400 md:text-lg">
             Our Collection
           </h2>
-          <a className="underline text-xs text-blue-600" href="#!">
-            see all
-          </a>
         </div>
         <select
           className="p-1 rounded-md border-2 border-rambow-400"

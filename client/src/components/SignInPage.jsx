@@ -1,4 +1,4 @@
-import InputWithIcon from "./InputWithIcon";
+import Login from "./Login";
 import RegisterUser from "./RegisterUser";
 import SignInCover from "./SignInCover";
 import { UserContext } from "./UserContext";
@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 
 const SignInPage = () => {
-  const { userInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo } = useContext(UserContext);
 
   if (userInfo.logedIn) {
     return <Navigate to="/" />;
@@ -22,23 +22,7 @@ const SignInPage = () => {
             <h2 className="font-bold mb-8 text-white text-3xl text-center">
               Login
             </h2>
-            <form className="flex flex-col gap-4">
-              <InputWithIcon
-                id="loginUsername"
-                icon="person"
-                input_type="text"
-                placeholder="username"
-              />
-              <InputWithIcon
-                id="loginPassword"
-                icon="lock"
-                input_type="password"
-                placeholder="password"
-              />
-              <button className="bg-rambow-300 py-1 px-20 rounded-full text-white font-bold mx-auto">
-                login
-              </button>
-            </form>
+            <Login user={{ userInfo, setUserInfo }} />
           </div>
         </div>
 
@@ -47,7 +31,7 @@ const SignInPage = () => {
             <h2 className="font-bold mb-8 text-white text-3xl text-center">
               Register
             </h2>
-            <RegisterUser />
+            <RegisterUser user={{ userInfo, setUserInfo }} />
           </div>
         </div>
       </div>

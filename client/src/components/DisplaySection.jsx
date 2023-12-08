@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ItemSample from "./ItemSample";
 import Pagination from "./Pagination";
 const DisplaySection = () => {
@@ -8,9 +9,9 @@ const DisplaySection = () => {
           <h2 className="font-bold text-rambow-400 md:text-lg">
             Our Collection
           </h2>
-          <a className="underline text-xs text-blue-600" href="#!">
+          <Link className="underline text-xs text-blue-600" to="products">
             see all
-          </a>
+          </Link>
         </div>
         <select
           className="p-1 rounded-md border-2 border-rambow-400"
