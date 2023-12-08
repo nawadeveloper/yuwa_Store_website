@@ -3,10 +3,13 @@ import HomePage from "./components/HomePage";
 import Layout from "./components/Layout";
 import ProductsPage from "./components/ProductsPage";
 import SignInPage from "./components/SignInPage";
-import AdminPanel from "./components/AdminPanel";
 import Cookies from "js-cookie";
 import { useEffect, useContext } from "react";
 import { UserContext } from "./components/UserContext";
+import AddProduct from "./components/AddProduct";
+import AdminLayout from "./components/AdminLayout";
+import AdminPanel from "./components/AdminPanel";
+import AdminProductList from "./components/AdminProductList";
 
 async function check_login(setUserInfo) {
   const response = await fetch("http://localhost:4000/auth/check_login", {
@@ -55,7 +58,11 @@ function App() {
           />
         </Route>
         <Route path="/signin" element={<SignInPage />} />
-        <Route path="/admin_panel/add_item" element={<AdminPanel />} />
+        <Route path="/admin_panel" element={<AdminLayout />}>
+          <Route index element={<AdminPanel />} />
+          <Route path="add_item" element={<AddProduct />} />
+          <Route path="admin_product_list" element={<AdminProductList />} />
+        </Route>
       </Routes>
     </>
   );
