@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 
 // import router
 const authRouter = require("./Routers/AuthRouter.js");
+const productRouter = require("./Routers/ProductRouter.js");
 
 const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
@@ -28,3 +29,4 @@ mongoose
 
 //set route
 app.use("/auth", authRouter);
+app.use("/product", productRouter);
