@@ -59,12 +59,27 @@ const AddProduct = () => {
             encType="multipart/form-data"
             className="flex flex-col justify-center px-16 gap-3 h-full"
           >
-            <label
-              htmlFor="choose_img"
-              className="underline underline-offset-4 text-violet-500 cursor-pointer hover:no-underline max-w-max"
-            >
-              choose image for your product
-            </label>
+            <div className="flex gap-5">
+              <label
+                htmlFor="choose_img"
+                className="underline underline-offset-4 text-violet-500 cursor-pointer hover:no-underline max-w-max"
+              >
+                choose image for your product
+              </label>
+
+              {itemPic && (
+                <motion.span
+                  key={itemPic ? "true" : "false"}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 1, opacity: 1 }}
+                  exit={{ scale: 0.3, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="material-symbols-rounded"
+                >
+                  check_circle
+                </motion.span>
+              )}
+            </div>
 
             <input
               className="hidden"

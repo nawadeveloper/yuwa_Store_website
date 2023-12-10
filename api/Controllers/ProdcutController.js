@@ -1,4 +1,3 @@
-const { response } = require("express");
 const Products = require("../Models/Products");
 const fs = require("fs");
 
@@ -32,8 +31,6 @@ const addProduct = async (req, res) => {
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
-
-  res.json({ message: newPath });
 };
 
 module.exports = {
