@@ -1,18 +1,51 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
   const [itemPic, setItemPic] = useState(null);
+  const stock = useRef(null);
 
   const getImageForPreview = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setItemPic(reader.result);
+        setItemPic({ targetFile: selectedFile, img_path: reader.result });
       };
       reader.readAsDataURL(selectedFile);
     }
+  };
+
+  const addProduct = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.set("productName", productName);
+    formData.set("stock", stock.current.value);
+    formData.set("productImage", itemPic?.targetFile);
+
+    fetch("http://localhost:4000/product/addProduct", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("No response from server. Please try again.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        window.alert(data.message);
+
+        if (data.upload) {
+          setProductName("");
+          setItemPic(null);
+          stock.current.value = 0;
+        }
+      })
+      .catch((e) => {
+        window.alert(e);
+      });
   };
   return (
     <>
@@ -21,7 +54,11 @@ const AddProduct = () => {
           <h2 className="text-center bg-rambow-400 font-bold text-3xl py-2 text-white">
             Add Item
           </h2>
-          <form className="flex flex-col justify-center px-16 gap-3 h-full">
+          <form
+            onSubmit={addProduct}
+            encType="multipart/form-data"
+            className="flex flex-col justify-center px-16 gap-3 h-full"
+          >
             <label
               htmlFor="choose_img"
               className="underline underline-offset-4 text-violet-500 cursor-pointer hover:no-underline max-w-max"
@@ -57,6 +94,7 @@ const AddProduct = () => {
                 type="number"
                 id="product_quantity"
                 placeholder="quantity of Item"
+                ref={stock}
               />
             </div>
 
@@ -73,8 +111,8 @@ const AddProduct = () => {
               <AnimatePresence mode="wait">
                 {itemPic && (
                   <motion.img
-                    key={itemPic}
-                    src={itemPic}
+                    key={itemPic?.img_path}
+                    src={itemPic?.img_path}
                     alt="Product_Image"
                     className="w-full h-full object-cover"
                     initial={{ scale: 0.3, opacity: 0 }}
