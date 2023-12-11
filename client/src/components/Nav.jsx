@@ -46,7 +46,7 @@ const Nav = () => {
           menu
         </span>
 
-        <SignInLink className="pr-1" />
+        <SignInLink className="pr-1 flex shrink-0" />
 
         {/* nav for mobile */}
         {

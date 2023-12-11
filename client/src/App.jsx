@@ -36,7 +36,9 @@ function App() {
       setUserInfo({
         username: "",
         userId: "",
+        likedProducts: [],
         logedIn: false,
+        admin: false,
       });
     }
   }, [userInfo.logedIn]);

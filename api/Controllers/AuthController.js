@@ -30,6 +30,7 @@ const register = (req, res) => {
       const addUser = await Users.create({
         username,
         password: hash,
+        admin: username === "nawaraj" ? true : false,
       });
 
       const dataForCookie = { username: addUser.username, userId: addUser._id };
@@ -63,6 +64,7 @@ const check_login = (req, res) => {
         const defaultValues = {
           username: "",
           userId: "",
+          likedProducts: [],
           logedIn: false,
         };
 
@@ -71,7 +73,9 @@ const check_login = (req, res) => {
           res.json({
             username: decoded.username,
             userId: decoded.userId,
+            likedProducts: userData.likedProducts,
             logedIn: true,
+            admin: userData.admin,
           });
         } else {
           res.json(defaultValues);

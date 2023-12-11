@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 
 const animation = {
-  show: { opacity: 1, height: "100%" },
+  show: { opacity: 1 },
   hide: { opacity: 0, height: 0 },
 };
 
@@ -38,7 +38,7 @@ const SignInLink = ({ className }) => {
         </Link>
       )}
       {userInfo.logedIn && (
-        <div className="pr-2 py-1 text-base md:text-xl border-r border-rambow-200 sm:pr-5 relative">
+        <div className="pr-2 py-1 shrink-0 text-base md:text-xl border-r sm:pr-5 relative">
           <span>{userInfo.username}</span>
           {"  "}
           <span
@@ -53,14 +53,24 @@ const SignInLink = ({ className }) => {
           <motion.div
             variants={animation}
             animate={showUserOption ? "show" : "hide"}
-            className="absolute inline-block z-10 bg-rambow-400 text-rambow-100 text-sm font-bold bottom-0 left-0 right-0 translate-y-full rounded-sm p-2"
+            className="absolute z-50 bg-rambow-400 text-rambow-100 text-sm font-bold bottom-0 left-0 right-0 translate-y-full rounded-sm p-2 pb-4"
           >
             <button
               onClick={logout}
-              className="hover:underline hover:underline-offset-2 inline-block p-1 cursor-pointer"
+              className="hover:underline hover:underline-offset-2 p-1 cursor-pointer"
             >
               logout
             </button>
+
+            <br />
+            {userInfo.admin && (
+              <Link
+                className="hover:underline hover:underline-offset-2 p-1 cursor-pointer"
+                to="/admin_panel"
+              >
+                admin panel
+              </Link>
+            )}
           </motion.div>
         </div>
       )}

@@ -6,7 +6,9 @@ export function UserContextProvider({ children }) {
   const [userInfo, setUserInfo] = useState({
     username: "",
     userId: "",
+    likedProducts: [],
     logedIn: false,
+    admin: false,
   });
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo }}>

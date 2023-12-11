@@ -7,6 +7,9 @@ const addProduct = async (req, res) => {
 
   if (productName.trim() === "" || path === "") {
     res.json({ message: "Please fill all required form." });
+    fs.unlink(path, (error) => {
+      console.log(error);
+    });
     return;
   }
 
@@ -26,6 +29,10 @@ const addProduct = async (req, res) => {
       res.json({
         message: `${productName} is added to the product list.`,
         upload: true,
+      });
+    } else {
+      fs.unlink(newPath, (error) => {
+        console.log(error);
       });
     }
   } catch (e) {
