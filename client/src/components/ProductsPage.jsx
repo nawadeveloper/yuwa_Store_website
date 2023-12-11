@@ -1,5 +1,4 @@
 import ItemSample from "./ItemSample";
-import Pagination from "./Pagination";
 const ProductsPage = () => {
   return (
     <section className="display_size_noPadding px-5 sm:px-16 md:px-1 mt-20">
@@ -39,7 +38,7 @@ const ProductsPage = () => {
         <ItemSample img_path="black_jacket.jpeg" product_name="black_jacket" />
       </div>
 
-      <Pagination />
+      {/* <Pagination /> */}
     </section>
   );
 };

@@ -40,6 +40,35 @@ const addProduct = async (req, res) => {
   }
 };
 
+const getProductList = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 4;
+
+  try {
+    const totalProducts = await Products.countDocuments();
+    const totalPages = Math.ceil(totalProducts / pageSize);
+
+    const products = await Products.find()
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    if (products) {
+      res.json({
+        message: products,
+        currentPage: page,
+        totalPages,
+        totalProducts,
+      });
+      return;
+    } else {
+      res.json({ message: [{ imagePath: "", productName: "" }] });
+    }
+  } catch (e) {
+    res.status(400).json({ message: [{ imagePath: "", productName: "" }] });
+  }
+};
+
 module.exports = {
   addProduct,
+  getProductList,
 };

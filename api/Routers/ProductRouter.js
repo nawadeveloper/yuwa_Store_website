@@ -12,4 +12,6 @@ router.post(
   productController.addProduct
 );
 
+router.get("/getProductList", productController.getProductList);
+
 module.exports = router;

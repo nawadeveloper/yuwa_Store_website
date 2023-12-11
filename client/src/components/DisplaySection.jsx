@@ -1,7 +1,49 @@
 import { Link } from "react-router-dom";
 import ItemSample from "./ItemSample";
-import Pagination from "./Pagination";
+import { useState, useEffect } from "react";
+import PaginationButton from "./PaginationButton";
+
+const getProductList = (getProducts, setTotalPages, currentPage) => {
+  fetch(`http://localhost:4000/product/getProductList?page=${currentPage}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      getProducts(data?.message);
+      setTotalPages(data?.totalPages);
+    })
+    .catch((e) => console.log(e));
+};
+
 const DisplaySection = () => {
+  const [products, getProducts] = useState([
+    { imagePath: "", productName: "" },
+  ]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const changePage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      changePage(currentPage - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      changePage(currentPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    getProductList(getProducts, setTotalPages, currentPage);
+    // console.log(products);
+  }, [currentPage]);
+
   return (
     <section className="display_size_noPadding px-5 sm:px-16 md:px-1 mt-20">
       <div className="flex justify-between">
@@ -26,24 +68,40 @@ const DisplaySection = () => {
       </div>
 
       <div className="gap-5 grid grid-template mt-5">
-        <ItemSample img_path="black_jacket.jpeg" product_name="black_jacket" />
-        <ItemSample
-          img_path="bassball_jacket.jpeg"
-          product_name="bassball_jacket"
-        />
-        <ItemSample img_path="black_jacket.jpeg" product_name="black_jacket" />
-        <ItemSample
-          img_path="bassball_jacket.jpeg"
-          product_name="bassball_jacket"
-        />
-        <ItemSample
-          img_path="bassball_jacket.jpeg"
-          product_name="bassball_jacket"
-        />
-        <ItemSample img_path="black_jacket.jpeg" product_name="black_jacket" />
+        {products.map((data) => (
+          <ItemSample
+            key={data.imagePath}
+            product_name={data.productName}
+            img_path={`http://localhost:4000/${data.imagePath}`}
+          />
+        ))}
       </div>
 
-      <Pagination />
+      <div className="pt-8 pb-6 flex gap-3 justify-center items-center">
+        <button
+          onClick={prevPage}
+          className="w-10 h-10 flex justify-center items-center p-1 border-2 border-rambow-300 text-rambow-400 rounded-lg hover:bg-rambow-100"
+        >
+          <span className="material-symbols-rounded">chevron_left</span>
+        </button>
+
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <PaginationButton
+            key={index}
+            num={index + 1}
+            changePage={changePage}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        ))}
+
+        <button
+          onClick={nextPage}
+          className="w-10 h-10 flex justify-center items-center p-1 border-2 border-rambow-300 text-rambow-400 rounded-lg hover:bg-rambow-100"
+        >
+          <span className="material-symbols-rounded">chevron_right</span>
+        </button>
+      </div>
     </section>
   );
 };
