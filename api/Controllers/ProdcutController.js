@@ -1,4 +1,5 @@
 const Products = require("../Models/Products");
+const Users = require("../Models/Users");
 const fs = require("fs");
 
 const addProduct = async (req, res) => {
@@ -61,14 +62,68 @@ const getProductList = async (req, res) => {
       });
       return;
     } else {
-      res.json({ message: [{ imagePath: "", productName: "" }] });
+      res.json({ message: [{ imagePath: "", productName: "", _id: "" }] });
     }
   } catch (e) {
-    res.status(400).json({ message: [{ imagePath: "", productName: "" }] });
+    res
+      .status(400)
+      .json({ message: [{ imagePath: "", productName: "", _id: "" }] });
+  }
+};
+
+const addOrRemoveLike = async (req, res) => {
+  const productId = req.query.productId;
+  const decoded = req.user;
+
+  try {
+    const userData = await Users.findOne({ username: decoded?.username });
+
+    if (userData) {
+      const likedProducts = userData.likedProducts;
+      const index = likedProducts.indexOf(productId);
+      if (index !== -1) {
+        likedProducts.splice(index, 1);
+      } else {
+        likedProducts.push(productId);
+      }
+
+      userData.likedProducts = likedProducts;
+
+      await userData.save();
+
+      res.json(likedProducts);
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  } catch (e) {
+    res.status(400).json({ message: e });
+  }
+};
+
+const getProductsByIdList = async (req, res) => {
+  if (!req.query.productIds) {
+    return res.json({ message: "productIds required." });
+  }
+  const productIds = req.query.productIds.split(",");
+
+  try {
+    const productData = await Products.find({
+      _id: {
+        $in: productIds,
+      },
+    });
+
+    if (productData) {
+      res.json({ data: productData });
+    }
+  } catch (e) {
+    res.status(400).json({ message: e.message });
   }
 };
 
 module.exports = {
   addProduct,
   getProductList,
+  addOrRemoveLike,
+  getProductsByIdList,
 };

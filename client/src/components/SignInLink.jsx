@@ -28,7 +28,7 @@ const SignInLink = ({ className }) => {
     <div className={className}>
       {!userInfo.logedIn && (
         <Link
-          to={"/signin"}
+          to="/signin"
           className="pr-2 py-1 text-base md:text-xl border-r border-rambow-200 sm:pr-5"
         >
           sign in{" "}
@@ -74,12 +74,13 @@ const SignInLink = ({ className }) => {
           </motion.div>
         </div>
       )}
-      <button className="pl-2 py-1 text-base md:text-xl border-l border-rambow-200 sm:pl-5">
+      <Link
+        to="/likedItems"
+        className="pl-2 py-1 md:text-xl border-l border-rambow-200 sm:pl-5 flex items-center"
+      >
         liked{" "}
-        <span className="material-symbols-rounded filled align-middle leading-none text-lg md:text-2xl">
-          favorite
-        </span>
-      </button>
+        <span className="material-symbols-rounded filled pl-2">favorite</span>
+      </Link>
     </div>
   );
 };

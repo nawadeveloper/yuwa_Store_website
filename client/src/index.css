@@ -92,6 +92,10 @@ div.light_to_dark {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+.grid-fixed-size {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+}
+
 .text_shadow {
   text-shadow: 1px 1px 2px #113946;
 }

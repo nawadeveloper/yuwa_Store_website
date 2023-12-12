@@ -10,6 +10,7 @@ import AddProduct from "./components/AddProduct";
 import AdminLayout from "./components/AdminLayout";
 import AdminPanel from "./components/AdminPanel";
 import AdminProductList from "./components/AdminProductList";
+import LikedItems from "./components/LikedItems";
 
 async function check_login(setUserInfo) {
   const response = await fetch("http://localhost:4000/auth/check_login", {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="products" element={<ProductsPage />} />
+          <Route path="likedItems" element={<LikedItems />} />
 
           <Route
             path="*"

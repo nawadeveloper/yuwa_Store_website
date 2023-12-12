@@ -7,7 +7,11 @@ router.get("/", authControllers.sendMessage);
 
 router.post("/register", authControllers.register);
 
-router.get("/check_login", authControllers.check_login);
+router.get(
+  "/check_login",
+  authControllers.verifyToken,
+  authControllers.check_login
+);
 
 router.post("/login", authControllers.login);
 

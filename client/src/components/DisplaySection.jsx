@@ -17,7 +17,7 @@ const getProductList = (getProducts, setTotalPages, currentPage) => {
 
 const DisplaySection = () => {
   const [products, getProducts] = useState([
-    { imagePath: "", productName: "" },
+    { imagePath: "", productName: "", id: "" },
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +41,6 @@ const DisplaySection = () => {
 
   useEffect(() => {
     getProductList(getProducts, setTotalPages, currentPage);
-    // console.log(products);
   }, [currentPage]);
 
   return (
@@ -70,9 +69,10 @@ const DisplaySection = () => {
       <div className="gap-5 grid grid-template mt-5">
         {products.map((data) => (
           <ItemSample
-            key={data.imagePath}
+            key={data._id}
             product_name={data.productName}
             img_path={`http://localhost:4000/${data.imagePath}`}
+            id={data._id}
           />
         ))}
       </div>

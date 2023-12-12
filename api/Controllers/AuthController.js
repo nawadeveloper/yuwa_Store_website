@@ -50,38 +50,46 @@ const register = (req, res) => {
   });
 };
 
-const check_login = (req, res) => {
+function verifyToken(req, res, next) {
   const token = req.cookies;
 
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
+  }
+
+  jwt.verify(token.yuwa_user, process.env.PRIVATE_KEY, {}, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    }
+
+    req.user = decoded;
+    next();
+  });
+}
+
+const check_login = async (req, res) => {
+  const decoded = req.user; // req.user received from verifyToken middleware that use jwt.verify
+
   try {
-    jwt.verify(
-      token.yuwa_user,
-      process.env.PRIVATE_KEY,
-      {},
-      async (err, decoded) => {
-        if (err) throw err;
+    const defaultValues = {
+      username: "",
+      userId: "",
+      likedProducts: [],
+      logedIn: false,
+    };
 
-        const defaultValues = {
-          username: "",
-          userId: "",
-          likedProducts: [],
-          logedIn: false,
-        };
-
-        const userData = await Users.findOne({ username: decoded.username });
-        if (decoded.userId == userData._id) {
-          res.json({
-            username: decoded.username,
-            userId: decoded.userId,
-            likedProducts: userData.likedProducts,
-            logedIn: true,
-            admin: userData.admin,
-          });
-        } else {
-          res.json(defaultValues);
-        }
-      }
-    );
+    const userData = await Users.findOne({ username: decoded.username });
+    if (decoded.userId == userData._id) {
+      res.json({
+        username: decoded.username,
+        userId: decoded.userId,
+        likedProducts: userData.likedProducts,
+        logedIn: true,
+        admin: userData.admin,
+      });
+    } else {
+      res.json(defaultValues);
+    }
   } catch (e) {
     res.json(defaultValues);
   }
@@ -122,5 +130,6 @@ module.exports = {
   sendMessage,
   register,
   check_login,
+  verifyToken,
   login,
 };
