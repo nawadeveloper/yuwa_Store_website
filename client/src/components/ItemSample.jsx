@@ -1,7 +1,6 @@
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 
 const ItemSample = ({ img_path, product_name, id }) => {
   const { userInfo, setUserInfo } = useContext(UserContext);
@@ -23,6 +22,9 @@ const ItemSample = ({ img_path, product_name, id }) => {
       setUserInfo({ ...userInfo, likedProducts });
       setLike((prev) => !prev);
     }
+    if (response.status === 401) {
+      window.alert("Please log in first to like the product.");
+    }
   };
 
   useEffect(() => {
@@ -30,11 +32,7 @@ const ItemSample = ({ img_path, product_name, id }) => {
   }, []);
 
   return (
-    <motion.div
-      exit={{ scale: 0.3, opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="border border-rambow-400 p-2 pb-0 rounded-sm"
-    >
+    <div className="border border-rambow-400 p-2 pb-0 rounded-sm">
       <div className="h-64 md:h-80 border border-rambow-400 overflow-hidden">
         <img
           className="w-full h-full object-cover"
@@ -57,7 +55,7 @@ const ItemSample = ({ img_path, product_name, id }) => {
           favorite
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

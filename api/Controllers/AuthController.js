@@ -1,6 +1,11 @@
 const Users = require("../Models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const saltRounds = 10;
 
@@ -11,9 +16,53 @@ function addTokenToCookie(dataForCookie, response) {
 }
 
 //main functions
-const sendMessage = (req, res) => {
-  res.json({ message: "auth controller message." });
+const failedMessage = (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "auth controller failed message.",
+  });
 };
+
+const successMessage = (req, res) => {
+  if (req.user) {
+    res.json({
+      success: true,
+      message: "auth controller success message.",
+      user: req.user,
+      cookies: req.cookies,
+    });
+  }
+};
+
+const google_logout = (req, res) => {
+  req.logout();
+  res.redirect("http://localhost:5173/");
+};
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      //   return cb(err, user);
+      // });
+
+      done(null, profile);
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 const register = (req, res) => {
   const { username, password } = req.body;
@@ -127,9 +176,11 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  sendMessage,
+  failedMessage,
+  successMessage,
   register,
   check_login,
   verifyToken,
   login,
+  google_logout,
 };

@@ -44,6 +44,17 @@ function App() {
     }
   }, [userInfo.logedIn]);
 
+  //google auth
+  useEffect(() => {
+    fetch("http://localhost:4000/auth/login/success", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data.user))
+      .catch((e) => console.log(e));
+  });
+
   return (
     <>
       <Routes>
